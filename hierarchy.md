@@ -1,0 +1,5 @@
+In this implementation, each fork is represented by a Fork struct that includes a mutex. Each philosopher is represented by a Philosopher struct that includes an ID and pointers to its left and right forks.
+
+The eat() method of the Philosopher struct acquires the hierarchy mutex, then acquires its left and right forks in a way that ensures that a deadlock cannot occur. The philosopher then releases its forks in the opposite order, then releases the hierarchy mutex.
+
+In the main() function, the forks and philosophers are initialized, and a wait group and hierarchy mutex are created. A goroutine is started for each philosopher to call the eat() method, passing in the wait group and hierarchy mutex. Finally, the wait group is waited on to ensure that all philosophers have finished eating before the program exits.
