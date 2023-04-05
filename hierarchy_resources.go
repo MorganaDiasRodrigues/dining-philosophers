@@ -56,18 +56,18 @@ func main() {
     var hierarchy sync.Mutex // parâmetros esperados pela função
     var wg sync.WaitGroup  // eat dos Philosophers
 
-    // esta parte é para testar um caso em que eles comam 10 vezes
-	// for j := 0; j<10; j++{
-	// 	for i := 0; i < 5; i++ {
-	// 		wg.Add(1)
-	// 		go philosophers[i].eat(&wg, &hierarchy)
-	// 	}
-	// }
-    for i := 0; i < 5; i++ { // para cada filósofo
-        wg.Add(1) // contabndo cada go routine
-        go philosophers[i].eat(&wg, &hierarchy) // chamando de forma concorrente 
-                                                // o array de filósfos com o método eat
-    }
+    // esta parte é para testar um caso em que eles comam n vezes
+	for j := 0; j<60; j++{
+		for i := 0; i < 5; i++ {
+			wg.Add(1)
+			go philosophers[i].eat(&wg, &hierarchy)
+		}
+	}
+    // for i := 0; i < 5; i++ { // para cada filósofo
+    //     wg.Add(1) // contabndo cada go routine
+    //     philosophers[i].eat(&wg, &hierarchy) // chamando de forma concorrente 
+    //                                             // o array de filósfos com o método eat
+    // }
 		
     wg.Wait() // esperando todas as go routines
 
